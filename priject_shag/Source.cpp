@@ -55,6 +55,7 @@ void save_song() {
 				break;
 			}
 		}
+		all_songs_read.close();
 
 		all_songs_write.open(songs_filename, ios_base::app);
 
@@ -73,7 +74,6 @@ void save_song() {
 		else cout << "song is already created" << endl;        //если же введеное имя уже использовалось
 
 		all_songs_write.close();
-		all_songs_read.close();
 
 		cout << "you want to end adding songs ?(yes/no)"; cin >> answer_end;
 		answer = (answer_end == "yes");               //  спрашиваем нужно ли продолжать ввод
