@@ -82,7 +82,7 @@ void save_song() {
 		all_songs_write.close();
 
 		cout << "you want to continue adding songs? (yes/no)"; cin >> answer_continue;
-		user_wants_to_continue = (answer_continue != "yes");               //  спрашиваем нужно ли продолжать ввод
+		user_wants_to_continue = (answer_continue == "yes");               //  спрашиваем нужно ли продолжать ввод
 	}
 }
 
