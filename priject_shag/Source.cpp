@@ -72,19 +72,23 @@ bool user_wants_to_continue() {
 	return answer == "yes" || answer == "y";
 }
 
+void check_and_save(string songs_filename, Song song) {
+	// проверяем, вводилась ли уже эта песня
+	if (song_already_exists(songs_filename, song.song_name)) {
+		cout << "song is already created" << endl;        //говорим если введеное имя уже использовалось
+	}
+	else {
+		// иначе - сохраняем песню
+		save_song(songs_filename, song);
+	}
+}
+
 void add_songs() {
-	const string songs_filename = "all_songs.txt";
 	do {
-		Song song; // создаем обьект для хранение данных про будущую песню
-		enter_info(&song); // спрашиваем эти данные             
-		// проверяем, вводилась ли уже эта песня
-		if (song_already_exists(songs_filename, song.song_name)) {
-			cout << "song is already created" << endl;        //говорим если введеное имя уже использовалось
-		}
-		else {
-			// иначе - сохраняем песню
-			save_song(songs_filename, song);
-		}
+		Song song;								// создаем обьект для хранение данных про будущую песню
+		enter_info(&song);						// запрашиваем эти данные      
+		check_and_save("all_songs.txt", song);	// проверяем на дублирование и сохраняем
+		
 	} while (user_wants_to_continue());
 }
 
