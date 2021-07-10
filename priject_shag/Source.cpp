@@ -33,7 +33,7 @@ void save_song() {
 
 	ofstream all_songs_write;                     // создание файла для названий всех песен
 
-	while (answer != true) {
+	while (!answer) {
 		string line = "";
 		bool dublicate = false;
 
@@ -54,7 +54,7 @@ void save_song() {
 
 		all_songs_write.open("all_songs.txt", ios_base::app);
 
-		if (dublicate == false) {		                                           //   если введенное название новое
+		if (!dublicate) {		                                           //   если введенное название новое
 			all_songs_write << main_object.song_name << endl;
 
 			string file_name = main_object.song_name;               //     создаем новый файл для песни
@@ -72,7 +72,7 @@ void save_song() {
 		all_songs_read.close();
 
 		cout << "you want to end adding songs ?(yes/no)"; cin >> answer_end;
-		if (answer_end == "yes") answer = true;                  //  спрашиваем нужно ли продолжать ввод
+		answer = (answer_end == "yes");               //  спрашиваем нужно ли продолжать ввод
 	}
 	
 }
