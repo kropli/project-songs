@@ -68,9 +68,7 @@ void add_songs() {
 	string answer_continue = "";
 	bool user_wants_to_continue = true;
 
-
 	while (user_wants_to_continue) {
-
 		Song song; // создаем обьект для хранение данных про будущую песню
 		enter_info(&song); // спрашиваем эти данные             
 
