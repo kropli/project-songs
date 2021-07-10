@@ -47,39 +47,39 @@ bool song_already_exists(string filename, string song_name) {
 	all_songs_read.close();
 	return dublicate;
 }
+void save_song(string songs_filename, Song song) {
+	ofstream all_songs_write; // создание файла для названий всех песен
+	all_songs_write.open(songs_filename, ios_base::app);
+	//если введенное название новое
+	all_songs_write << song.song_name << endl;
+	all_songs_write.close();
 
-void save_song() {
-	const string txt = ".txt";
+	string file_name = song.song_name;               //создаем новый файл для песни
+	file_name += ".txt";
+	ofstream file_write;
+	file_write.open(file_name);
+
+	file_write << song.song_author << endl;       //  перекидываем в файл автора
+	file_write << song.song_text;                      //и текст
+	file_write.close();
+}
+void add_songs() {
 	const string songs_filename = "all_songs.txt";
 	string answer_continue = "";
 	bool user_wants_to_continue = true;
 
-	ofstream all_songs_write; // создание файла для названий всех песен
 
 	while (user_wants_to_continue) {
 
-		Song main_object; // создаем обьект для хранение данных про будущую песню
-		enter_info(&main_object); // спрашиваем эти данные             
+		Song song; // создаем обьект для хранение данных про будущую песню
+		enter_info(&song); // спрашиваем эти данные             
 
-		if (song_already_exists(songs_filename, main_object.song_name)) {
+		if (song_already_exists(songs_filename, song.song_name)) {
 			cout << "song is already created" << endl;        //если же введеное имя уже использовалось
 		}
 		else {
-			all_songs_write.open(songs_filename, ios_base::app);
-			//если введенное название новое
-			all_songs_write << main_object.song_name << endl;
-
-			string file_name = main_object.song_name;               //создаем новый файл для песни
-			file_name += txt;
-			ofstream file_write;
-			file_write.open(file_name);
-
-			file_write << main_object.song_author << endl;       //  перекидываем в файл автора
-			file_write << main_object.song_text;                      //и текст
-			file_write.close();
+			save_song(songs_filename, song);
 		}
-
-		all_songs_write.close();
 
 		cout << "you want to continue adding songs? (yes/no)"; cin >> answer_continue;
 		user_wants_to_continue = (answer_continue == "yes");               //  спрашиваем нужно ли продолжать ввод
@@ -88,5 +88,5 @@ void save_song() {
 
 int main() 
 {
-	save_song();
+	add_songs();
 }
