@@ -75,12 +75,12 @@ bool user_wants_to_continue() {
 void check_and_save(string songs_filename, Song song) {
 	// проверяем, вводилась ли уже эта песня
 	if (song_already_exists(songs_filename, song.song_name)) {
-		cout << "song is already created" << endl;        //говорим если введеное имя уже использовалось
+		//говорим если введеное имя уже использовалось
+		cout << "song is already created" << endl;
+		return;
 	}
-	else {
-		// иначе - сохраняем песню
-		save_song(songs_filename, song);
-	}
+	// иначе - сохраняем песню
+	save_song(songs_filename, song);
 }
 
 void add_songs() {
