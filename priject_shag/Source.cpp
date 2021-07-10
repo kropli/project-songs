@@ -54,11 +54,10 @@ void save_song(string songs_filename, Song song) {
 	all_songs_write << song.song_name << endl;
 	all_songs_write.close();
 
-	string file_name = song.song_name;               //создаем новый файл для песни
-	file_name += ".txt";
+	string file_name = song.song_name + ".txt";               //создаем новый файл для песни
+	
 	ofstream file_write;
 	file_write.open(file_name);
-
 	file_write << song.song_author << endl;       //  перекидываем в файл автора
 	file_write << song.song_text;                      //и текст
 	file_write.close();
