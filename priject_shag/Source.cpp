@@ -54,34 +54,41 @@ void save_song(string songs_filename, Song song) {
 	all_songs_write << song.song_name << endl;
 	all_songs_write.close();
 
-	string file_name = song.song_name;               //создаем новый файл для песни
-	file_name += ".txt";
+	string file_name = song.song_name + ".txt";               //создаем новый файл для песни
+	
 	ofstream file_write;
 	file_write.open(file_name);
-
 	file_write << song.song_author << endl;       //  перекидываем в файл автора
 	file_write << song.song_text;                      //и текст
 	file_write.close();
 }
-void add_songs() {
-	const string songs_filename = "all_songs.txt";
-	string answer_continue = "";
-	bool user_wants_to_continue = true;
 
-	while (user_wants_to_continue) {
-		Song song; // создаем обьект для хранение данных про будущую песню
-		enter_info(&song); // спрашиваем эти данные             
+bool user_wants_to_continue() {
+	string answer = "";
+	//  спрашиваем нужно ли продолжать ввод
+	cout << "you want to continue adding songs? (yes/no)";
+	cin >> answer;
+	return answer == "yes" || answer == "y";
+}
 
-		if (song_already_exists(songs_filename, song.song_name)) {
-			cout << "song is already created" << endl;        //если же введеное имя уже использовалось
-		}
-		else {
-			save_song(songs_filename, song);
-		}
-
-		cout << "you want to continue adding songs? (yes/no)"; cin >> answer_continue;
-		user_wants_to_continue = (answer_continue == "yes");               //  спрашиваем нужно ли продолжать ввод
+void check_and_save(string songs_filename, Song song) {
+	// проверяем, вводилась ли уже эта песня
+	if (song_already_exists(songs_filename, song.song_name)) {
+		//говорим если введеное имя уже использовалось
+		cout << "song is already created" << endl;
+		return;
 	}
+	// иначе - сохраняем песню
+	save_song(songs_filename, song);
+}
+
+void add_songs() {
+	do {
+		Song song;								// создаем обьект для хранение данных про будущую песню
+		enter_info(&song);						// запрашиваем эти данные      
+		check_and_save("all_songs.txt", song);	// проверяем на дублирование и сохраняем
+		
+	} while (user_wants_to_continue());
 }
 
 int main() 
