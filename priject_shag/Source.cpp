@@ -30,7 +30,8 @@ void enter_info(Song *info) {
 }
 
 void save_song() {
-	string txt = ".txt";
+	const string txt = ".txt";
+	const string songs_filename = "all_songs.txt";
 	string answer_end = "";
 	bool answer = false;
 
@@ -44,7 +45,7 @@ void save_song() {
 		enter_info(&main_object); // спрашиваем эти данные             
 
 		ifstream all_songs_read;
-		all_songs_read.open("all_songs.txt");
+		all_songs_read.open(songs_filename);
 		if (all_songs_read.is_open())  cout << "file open" << endl;
 
 		while (!all_songs_read.eof()) { // цикл для проверки равности введеного названия песни с существующими 
@@ -55,7 +56,7 @@ void save_song() {
 			}
 		}
 
-		all_songs_write.open("all_songs.txt", ios_base::app);
+		all_songs_write.open(songs_filename, ios_base::app);
 
 		if (!dublicate) {		                                //если введенное название новое
 			all_songs_write << main_object.song_name << endl;
