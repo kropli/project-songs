@@ -68,7 +68,7 @@ void add_songs() {
 	string answer_continue = "";
 	bool user_wants_to_continue = true;
 
-	while (user_wants_to_continue) {
+	do {
 		Song song; // создаем обьект для хранение данных про будущую песню
 		enter_info(&song); // спрашиваем эти данные             
 
@@ -81,7 +81,7 @@ void add_songs() {
 
 		cout << "you want to continue adding songs? (yes/no)"; cin >> answer_continue;
 		user_wants_to_continue = (answer_continue == "yes");               //  спрашиваем нужно ли продолжать ввод
-	}
+	} while (user_wants_to_continue);
 }
 
 int main() 
