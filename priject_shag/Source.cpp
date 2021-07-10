@@ -77,11 +77,12 @@ void add_songs() {
 	do {
 		Song song; // создаем обьект для хранение данных про будущую песню
 		enter_info(&song); // спрашиваем эти данные             
-
+		// проверяем, вводилась ли уже эта песня
 		if (song_already_exists(songs_filename, song.song_name)) {
-			cout << "song is already created" << endl;        //если же введеное имя уже использовалось
+			cout << "song is already created" << endl;        //говорим если введеное имя уже использовалось
 		}
 		else {
+			// иначе - сохраняем песню
 			save_song(songs_filename, song);
 		}
 	} while (user_wants_to_continue());
