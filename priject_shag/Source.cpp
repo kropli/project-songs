@@ -54,19 +54,19 @@ void save_song() {
 
 		all_songs_write.open("all_songs.txt", ios_base::app);
 
-		if (!dublicate) {		                                           //   если введенное название новое
+		if (!dublicate) {		                                //если введенное название новое
 			all_songs_write << main_object.song_name << endl;
 
-			string file_name = main_object.song_name;               //     создаем новый файл для песни
+			string file_name = main_object.song_name;               //создаем новый файл для песни
 			file_name += txt;
 			ofstream file_write;
 			file_write.open(file_name);
 
-			file_write << main_object.song_author << endl;             //  перекидываем в файл автора
-			file_write << main_object.song_text;                       //     и текст
+			file_write << main_object.song_author << endl;       //  перекидываем в файл автора
+			file_write << main_object.song_text;                      //и текст
 			file_write.close();
 		}
-		else cout << "song is already created" << endl;        // если же введеное имя уже использовалось
+		else cout << "song is already created" << endl;        //если же введеное имя уже использовалось
 
 		all_songs_write.close();
 		all_songs_read.close();
