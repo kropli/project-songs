@@ -37,7 +37,7 @@ void save_song() {
 
 	ofstream all_songs_write; // создание файла для названий всех песен
 
-	while (!answer) {
+	while (user_wants_to_continue) {
 		string line = "";
 		bool dublicate = false;
 
@@ -76,7 +76,7 @@ void save_song() {
 		all_songs_write.close();
 
 		cout << "you want to end adding songs ?(yes/no)"; cin >> answer_end;
-		answer = (answer_end == "yes");               //  спрашиваем нужно ли продолжать ввод
+		user_wants_to_continue = (answer_end != "yes");               //  спрашиваем нужно ли продолжать ввод
 	}
 }
 
