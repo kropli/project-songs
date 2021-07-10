@@ -32,8 +32,8 @@ void enter_info(Song *info) {
 void save_song() {
 	const string txt = ".txt";
 	const string songs_filename = "all_songs.txt";
-	string answer_end = "";
-	bool answer = false;
+	string answer_continue = "";
+	bool user_wants_to_continue = true;
 
 	ofstream all_songs_write; // создание файла для названий всех песен
 
@@ -78,8 +78,8 @@ void save_song() {
 
 		all_songs_write.close();
 
-		cout << "you want to end adding songs ?(yes/no)"; cin >> answer_end;
-		user_wants_to_continue = (answer_end != "yes");               //  спрашиваем нужно ли продолжать ввод
+		cout << "you want to continue adding songs? (yes/no)"; cin >> answer_continue;
+		user_wants_to_continue = (answer_continue != "yes");               //  спрашиваем нужно ли продолжать ввод
 	}
 }
 
