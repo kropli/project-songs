@@ -29,6 +29,25 @@ void enter_info(Song *info) {
 	cout << "enter text of the song: ";get (info -> song_text);
 }
 
+bool song_already_exists(string filename, string song_name) {
+	string line = "";
+	ifstream all_songs_read;
+	all_songs_read.open(filename);
+	if (all_songs_read.is_open())  cout << "file open" << endl;
+	
+	bool dublicate = false;
+
+	while (!all_songs_read.eof()) { // цикл для проверки равности введеного названия песни с существующими 
+		getline(all_songs_read, line);
+		if (line == song_name) {
+			dublicate = true;
+			break;
+		}
+	}
+	all_songs_read.close();
+	return dublicate;
+}
+
 void save_song() {
 	const string txt = ".txt";
 	const string songs_filename = "all_songs.txt";
@@ -38,31 +57,15 @@ void save_song() {
 	ofstream all_songs_write; // создание файла для названий всех песен
 
 	while (user_wants_to_continue) {
-		string line = "";
-		bool dublicate = false;
 
 		Song main_object; // создаем обьект для хранение данных про будущую песню
 		enter_info(&main_object); // спрашиваем эти данные             
 
-		ifstream all_songs_read;
-		all_songs_read.open(songs_filename);
-		if (all_songs_read.is_open())  cout << "file open" << endl;
-
-		while (!all_songs_read.eof()) { // цикл для проверки равности введеного названия песни с существующими 
-			getline(all_songs_read, line);
-			if (line == main_object.song_name) {
-				dublicate = true;
-				break;
-			}
-		}
-		all_songs_read.close();
-
-		all_songs_write.open(songs_filename, ios_base::app);
-
-		if (dublicate) {	
+		if (song_already_exists(songs_filename, main_object.song_name)) {
 			cout << "song is already created" << endl;        //если же введеное имя уже использовалось
 		}
 		else {
+			all_songs_write.open(songs_filename, ios_base::app);
 			//если введенное название новое
 			all_songs_write << main_object.song_name << endl;
 
