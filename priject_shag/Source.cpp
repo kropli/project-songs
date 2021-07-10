@@ -59,7 +59,11 @@ void save_song() {
 
 		all_songs_write.open(songs_filename, ios_base::app);
 
-		if (!dublicate) {		                                //если введенное название новое
+		if (dublicate) {	
+			cout << "song is already created" << endl;        //если же введеное имя уже использовалось
+		}
+		else {
+			//если введенное название новое
 			all_songs_write << main_object.song_name << endl;
 
 			string file_name = main_object.song_name;               //создаем новый файл для песни
@@ -71,7 +75,6 @@ void save_song() {
 			file_write << main_object.song_text;                      //и текст
 			file_write.close();
 		}
-		else cout << "song is already created" << endl;        //если же введеное имя уже использовалось
 
 		all_songs_write.close();
 
