@@ -63,11 +63,17 @@ void save_song(string songs_filename, Song song) {
 	file_write << song.song_text;                      //и текст
 	file_write.close();
 }
+
+bool user_wants_to_continue() {
+	string answer = "";
+	//  спрашиваем нужно ли продолжать ввод
+	cout << "you want to continue adding songs? (yes/no)";
+	cin >> answer;
+	return answer == "yes" || answer == "y";
+}
+
 void add_songs() {
 	const string songs_filename = "all_songs.txt";
-	string answer_continue = "";
-	bool user_wants_to_continue = true;
-
 	do {
 		Song song; // создаем обьект для хранение данных про будущую песню
 		enter_info(&song); // спрашиваем эти данные             
@@ -78,10 +84,7 @@ void add_songs() {
 		else {
 			save_song(songs_filename, song);
 		}
-
-		cout << "you want to continue adding songs? (yes/no)"; cin >> answer_continue;
-		user_wants_to_continue = (answer_continue == "yes");               //  спрашиваем нужно ли продолжать ввод
-	} while (user_wants_to_continue);
+	} while (user_wants_to_continue());
 }
 
 int main() 
